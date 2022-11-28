@@ -4,6 +4,6 @@
     {
         public int Id { get; set; }
         public string DependentName { get; set; }
-        public string Relationship { get; set; }
+        public string Relationship { get; set;}
     }
 }

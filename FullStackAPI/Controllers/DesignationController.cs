@@ -9,58 +9,55 @@ namespace FullStackAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentController : ControllerBase
+    public class DesignationController : ControllerBase
     {
         private readonly FullStackDbContext dbContext;
 
-        public DepartmentController(FullStackDbContext dbContext)
+        public DesignationController(FullStackDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
+
         // GET: api/<DepartmentController>
-
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Get()
         {
-            var department = await dbContext.Departments.ToListAsync();
-
-            return Ok(department);
+            return Ok(await dbContext.Designations.ToListAsync());
         }
 
         // GET api/<DepartmentController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var dept = await dbContext.Departments.FindAsync(id);
-            if (dept == null)
+            var desi = await dbContext.Designations.FindAsync(id);
+            if (desi == null)
             {
                 return NotFound();
             }
-            return Ok(dept);
+            return Ok(desi);
         }
-
-        // POST api/<DepartmentController>
+        // POST api/<DesignationController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] string value)
         {
-            var dept = new Department()
+            var desi = new Designation()
             {
-                DepartmentName = value
+                DesignationName = value
             };
 
-            await dbContext.Departments.AddAsync(dept);
+            await dbContext.Designations.AddAsync(desi);
             await dbContext.SaveChangesAsync();
 
-            return Ok(dept);
+            return Ok(desi);
         }
 
-        // PUT api/<DepartmentController>/5
+        // PUT api/<DesignationController>/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] string value)
         //{
         //}
 
-        // DELETE api/<DepartmentController>/5
+        //// DELETE api/<DesignationController>/5
         //[HttpDelete("{id}")]
         //public void Delete(int id)
         //{

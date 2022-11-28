@@ -9,8 +9,6 @@ namespace FullStackAPI.Models
         public DateTime DateofJoining { get; set; }
         public string Email { get; set; }
         public long PrimaryContactNumber { get; set; }
-        public string Location { get; set; }
-        public string ReportingManager { get; set; }
         public virtual Department Department { get; set; }
         public virtual Project Project { get; set; }
         public virtual Designation Designation { get; set; }

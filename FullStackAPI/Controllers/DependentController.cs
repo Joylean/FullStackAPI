@@ -2,6 +2,7 @@
 using FullStackAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,58 +10,55 @@ namespace FullStackAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentController : ControllerBase
+    public class DependentController : ControllerBase
     {
         private readonly FullStackDbContext dbContext;
 
-        public DepartmentController(FullStackDbContext dbContext)
+        public DependentController(FullStackDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
+
         // GET: api/<DepartmentController>
-
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Get()
         {
-            var department = await dbContext.Departments.ToListAsync();
-
-            return Ok(department);
+            return Ok(await dbContext.Dependents.ToListAsync());
         }
 
         // GET api/<DepartmentController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var dept = await dbContext.Departments.FindAsync(id);
-            if (dept == null)
+            var depen = await dbContext.Dependents.FindAsync(id);
+            if (depen == null)
             {
                 return NotFound();
             }
-            return Ok(dept);
+            return Ok(depen);
         }
-
-        // POST api/<DepartmentController>
+        // POST api/<DependentController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] string value)
         {
-            var dept = new Department()
+            var depen = new Dependent()
             {
-                DepartmentName = value
+                DependentName = value
             };
 
-            await dbContext.Departments.AddAsync(dept);
+            await dbContext.Dependents.AddAsync(depen);
             await dbContext.SaveChangesAsync();
 
-            return Ok(dept);
+            return Ok(depen);
         }
 
-        // PUT api/<DepartmentController>/5
+        // PUT api/<DependentController>/5
         //[HttpPut("{id}")]
         //public void Put(int id, [FromBody] string value)
         //{
         //}
 
-        // DELETE api/<DepartmentController>/5
+        //// DELETE api/<DependentController>/5
         //[HttpDelete("{id}")]
         //public void Delete(int id)
         //{

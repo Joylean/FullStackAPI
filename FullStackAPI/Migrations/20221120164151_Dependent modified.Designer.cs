@@ -4,6 +4,7 @@ using FullStackAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FullStackAPI.Migrations
 {
     [DbContext(typeof(FullStackDbContext))]
-    partial class FullStackDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221120164151_Dependent modified")]
+    partial class Dependentmodified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,9 +56,6 @@ namespace FullStackAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DependentName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Relationship")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
